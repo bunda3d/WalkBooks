@@ -1,0 +1,29 @@
+# github actions
+# place in path: .github/workflows/update-tree.yml
+
+name: Update Directory Tree
+
+on:
+  workflow_dispatch:
+
+jobs:
+  update-tree:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install tree
+        run: choco install tree -y
+
+      - name: Generate directory tree
+        run: powershell -ExecutionPolicy Bypass -File tools/generate-tree.ps1
+
+      - name: Commit updated README
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add README.md
+          git commit -m "Auto-update directory tree"
+          git push
