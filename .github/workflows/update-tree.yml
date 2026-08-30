@@ -1,6 +1,10 @@
 # github actions
 # place in path: .github/workflows/update-tree.yml
 
+# Generate ASCII map (run in Powershell from repo root [.../WalkBooks]): 
+# tree -a -I "bin|obj|node_modules|tmp|publish"
+
+
 name: Update Directory Tree
 
 on:
