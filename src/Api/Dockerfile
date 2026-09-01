@@ -5,15 +5,16 @@ WORKDIR /src
 # Works for .sln and .slnx
 COPY *.sln* ./
 
-COPY src/Api/*.csproj ./src/Api/
-COPY src/Application/*.csproj ./src/Application/
-COPY src/Domain/*.csproj ./src/Domain/
-COPY src/Infrastructure/*.csproj ./src/Infrastructure/
+# Copy only csproj files first (leverage layer caching)
+COPY src/Api/*.csproj ./Api/
+COPY src/Application/*.csproj ./Application/
+COPY src/Domain/*.csproj ./Domain/
+COPY src/Infrastructure/*.csproj ./Infrastructure/
 
 RUN dotnet restore
 
 COPY . .
-WORKDIR /src/src/Api
+WORKDIR /src/Api
 RUN dotnet publish -c Release -o /app/publish
 
 # Runtime stage
