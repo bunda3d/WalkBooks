@@ -1,21 +1,34 @@
-# github actions workflow to generate a directory tree in the README file
-# place in path: .github/workflows/update-tree.yml
+# GitHub Actions Workflow 
+# - Output: Generate & auto-update an ASCII repo directory tree in the README file.
+# - Place in path: .github/workflows/update-tree.yml
 
-# Generate ASCII map (locally to test) (run in Powershell from repo root [.../WalkBooks]): 
+# Generate ASCII map locally with this command, (cd to repo root [./WalkBooks]):
 # pwsh .\tools\generate-tree.ps1 -Depth 2
 
 name: Update Directory Tree
 
 on:
+  push:
+    branches: [main, master]
+  pull_request:
+    types: [closed]
   workflow_dispatch:
 
-# Permissions required for this workflow to update README file
+# permission to update README
 permissions:
   contents: write
 
+# Conditions that trigger this workflow:
+# push: runs for any push to main/master by a non-bot actor.
+# pull_request closed: runs only when a PR is closed and merged.
+# workflow_dispatch: keeps manual runs available from GitHub Actions UI (btn push).
 jobs:
   update-tree:
-    runs-on: windows-latest
+    if: >
+      (github.event_name == 'push' && github.actor != 'github-actions[bot]') ||
+      (github.event_name == 'pull_request' && github.event.pull_request.merged == true) ||
+      github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
@@ -23,53 +36,13 @@ jobs:
         with:
           persist-credentials: true
 
-      - name: Install tree (optional)
-        run: choco install tree -y
-
-      - name: Generate compact directory tree
-        run: |
-          pwsh -NoProfile -Command {
-            $out = 'README.md'
-            $exclude = @('.git','bin','obj','node_modules')
-            $depth = 2
-
-            function Write-Tree {
-              param($Path, $Prefix = '', $Level = 0)
-              if ($Level -gt $depth) { return }
-              $items = Get-ChildItem -LiteralPath $Path -Force |
-                Where-Object { -not ($exclude -contains $_.Name) } |
-                Sort-Object -Property PSIsContainer -Descending, Name
-              for ($i = 0; $i -lt $items.Count; $i++) {
-                $item = $items[$i]
-                $isLast = ($i -eq $items.Count - 1)
-                $branch = if ($isLast) { '└─ ' } else { '├─ ' }
-                $line = $Prefix + $branch + $item.Name
-                $line | Out-File -FilePath $out -Append -Encoding utf8
-                if ($item.PSIsContainer) {
-                  $newPrefix = $Prefix + (if ($isLast) { '   ' } else { '│  ' })
-                  Write-Tree -Path $item.FullName -Prefix $newPrefix -Level ($Level + 1)
-                }
-              }
-            }
-
-            # header
-            @(
-              '# WalkBooks Project Structure',
-              '',
-              'Below is an auto-generated directory map (depth: ' + $depth + ').',
-              'Regenerate with tools/generate-tree.ps1 or run this workflow.',
-              ''
-            ) | Out-File -FilePath $out -Encoding utf8
-
-            # root entry
-            '.' | Out-File -FilePath $out -Append -Encoding utf8
-            Write-Tree -Path (Get-Location).Path -Prefix '' -Level 0
-          }
+      - name: Run tree generator
+        run: pwsh -NoProfile -Command ".\tools\generate-tree.ps1 -Depth 2"
 
       - name: Commit updated README
         run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add README.md
           git commit -m "Auto-update directory tree" || echo "No changes to commit"
           git push
