@@ -5,17 +5,21 @@ WORKDIR /src
 # Works for .sln and .slnx
 COPY *.sln* ./
 
-# Copy only csproj files first (leverage layer caching)
-COPY src/Api/*.csproj ./Api/
-COPY src/Application/*.csproj ./Application/
-COPY src/Domain/*.csproj ./Domain/
-COPY src/Infrastructure/*.csproj ./Infrastructure/
+# copy csproj files into the same relative paths the solution expects
+COPY src/Api/*.csproj ./src/Api/
+COPY src/Application/*.csproj ./src/Application/
+COPY src/Domain/*.csproj ./src/Domain/
+COPY src/Infrastructure/*.csproj ./src/Infrastructure/
 
-RUN dotnet restore
+# restore using the solution at /src
+RUN dotnet restore "WalkBooks.slnx"
 
+# copy the rest of the repo
 COPY . .
-WORKDIR /src/Api
-RUN dotnet publish -c Release -o /app/publish
+
+# publish from the Api project path the solution uses
+WORKDIR /src/src/Api
+RUN dotnet publish "Api.csproj" -c Release -o /app/publish
 
 # Runtime stage
 FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS runtime
