@@ -37,7 +37,7 @@ jobs:
           persist-credentials: true
 
       - name: Run tree generator
-        run: pwsh -NoProfile -Command ".\tools\generate-tree.ps1 -Depth 2"
+        run: pwsh -NoProfile -Command ".\tools\generate-tree.ps1 -Depth 4"
 
       - name: Commit updated README
         run: |
