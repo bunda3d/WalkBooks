@@ -18,7 +18,7 @@
 
 param(
   [string]$Path = '.',
-  [int]$Depth = 2,
+  [int]$Depth = 4,
   [string[]]$Exclude = @('.git','bin','obj','node_modules','tmp','publish','.vs'),
   [string]$TmpFile = 'tree.tmp',
   [string]$ReadmeFile = 'README.md',
@@ -49,11 +49,14 @@ function Write-Tree {
   }
 }
 
+# Footer section title, also used to find and delete stale footer
+$footerHeading = '## WalkBooks Project Structure'
+
 # footer template (contains markers)
 $footerTemplate = @"
 <!--FOOTER-START-->
 
-## WalkBooks Project Structure
+$footerHeading
 
 Below is an auto-generated directory map (depth: $Depth).
 Regenerate by running GitHub Action Workflow "Update Directory Tree" or run locally:
@@ -85,15 +88,16 @@ if (-not (Test-Path $ReadmeFile)) {
 
 # --- load README and footer pattern ---
 $content = Get-Content -Raw -LiteralPath $ReadmeFile
-$footerHeading = "## WalkBooks Project Structure"
 $footerStart = '<!--FOOTER-START-->'
 $footerEnd   = '<!--FOOTER-END-->'
 $footerPattern = [regex]::Escape($footerStart) + '.*?' + [regex]::Escape($footerEnd)
 
-# If footer heading found, remove it and all subsequent content so we don't append dupe footers
-if ($content -match $footerHeading) {
-  $content = $content -replace "(?s)$footerHeading.*$", ''
-  Write-Host "Removed existing FOOTER section."
+# If footer heading found, remove it and subsequent content to avoid appending dupe footers
+
+if ($content -match [regex]::Escape($footerHeading)) {
+  $pattern = "(?s)" + [regex]::Escape($footerHeading) + ".*$"
+  $content = [regex]::Replace($content, $pattern, '')
+  Write-Host "Removed stale FOOTER section."
 }
 
 # If footer missing, append canonical footer (so subsequent runs always find markers)
@@ -111,7 +115,7 @@ if ($treeExists) {
   $treeText = Get-Content -Raw -LiteralPath $TmpFile
   $fencedBlock = '```' + "`n" + $treeText.TrimEnd() + "`n" + '```'
   # Replacement: header + instruction + fenced block (no markers)
-  $sectionHeader = "## WalkBooks Project Structure`n`nBelow is an auto-generated directory map (depth: $Depth).`n`n"
+  $sectionHeader = "$footerHeading`n`nBelow is an auto-generated directory map (depth: $Depth).`n`n"
   $instruction = "Regenerate by running GitHub Action Workflow `"Update Directory Tree`" `nor run locally: ``pwsh .\tools\generate-tree.ps1 -Depth $Depth``.`n`n"
   $replacement = $sectionHeader + $instruction + $fencedBlock + "`n"
   # Replace entire footer region with replacement (markers removed)
