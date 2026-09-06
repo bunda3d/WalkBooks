@@ -26,10 +26,10 @@ It uses a clean architecture layout, containerized API, automated CI/CD, and Azu
 
 ## WalkBooks Project Structure
 
-Below is an auto-generated directory map (depth: 2).
+Below is an auto-generated directory map (depth: 4).
 
 Regenerate by running GitHub Action Workflow "Update Directory Tree" 
-or run locally: `pwsh .\tools\generate-tree.ps1 -Depth 2`.
+or run locally: `pwsh .\tools\generate-tree.ps1 -Depth 4`.
 
 ```
 .
@@ -51,7 +51,15 @@ or run locally: `pwsh .\tools\generate-tree.ps1 -Depth 2`.
 ├─ src
 │  ├─ Api
 │  │  ├─ GraphQL
+│  │  │  ├─ Types
+│  │  │  │  ├─ BookCopyType.cs
+│  │  │  │  ├─ BookType.cs
+│  │  │  │  ├─ LibrarySnapshotType.cs
+│  │  │  │  ├─ LibraryType.cs
+│  │  │  │  └─ UserContributionType.cs
+│  │  │  └─ Query.cs
 │  │  ├─ Properties
+│  │  │  └─ launchSettings.json
 │  │  ├─ Api.csproj
 │  │  ├─ Api.http
 │  │  ├─ appsettings.Development.json
