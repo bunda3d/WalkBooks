@@ -85,9 +85,16 @@ if (-not (Test-Path $ReadmeFile)) {
 
 # --- load README and footer pattern ---
 $content = Get-Content -Raw -LiteralPath $ReadmeFile
+$footerHeading = "## WalkBooks Project Structure"
 $footerStart = '<!--FOOTER-START-->'
 $footerEnd   = '<!--FOOTER-END-->'
 $footerPattern = [regex]::Escape($footerStart) + '.*?' + [regex]::Escape($footerEnd)
+
+# If footer heading found, remove it and all subsequent content so we don't append dupe footers
+if ($content -match $footerHeading) {
+  $content = $content -replace "(?s)$footerHeading.*$", ''
+  Write-Host "Removed existing FOOTER section."
+}
 
 # If footer missing, append canonical footer (so subsequent runs always find markers)
 if (-not ($content -match $footerPattern)) {
