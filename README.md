@@ -52,7 +52,8 @@ or run locally: `pwsh .\tools\generate-tree.ps1 -Depth 4`.
 │  ├─ Api
 │  │  ├─ Data
 │  │  │  ├─ genres.json
-│  │  │  └─ GenreSeed.cs
+│  │  │  ├─ GenreSeed.cs
+│  │  │  └─ WalkBooksDbContext.cs
 │  │  ├─ GraphQL
 │  │  │  ├─ Mutations
 │  │  │  │  ├─ BookCopyMutations.cs
