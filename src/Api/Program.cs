@@ -1,3 +1,4 @@
+using Api.Data;
 using Api.GraphQL;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,9 +8,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services
 	.AddOpenApi()
 	.AddGraphQLServer()
-	.AddQueryType<Query>();
+	.AddQueryType<Query>()
+	.AddMutationType<Mutation>();
 
 var app = builder.Build();
+
+// Load the static list of book genres from the JSON file
+GenreSeed.LoadBookGenres("Data/genres.json");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

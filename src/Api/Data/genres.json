@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "genres": {
+    "book": [
+      "Fantasy",
+      "Science Fiction",
+      "Mystery",
+      "Thriller",
+      "Horror",
+      "Romance",
+      "Historical Fiction",
+      "Literary Fiction",
+      "Young Adult",
+      "Children’s",
+      "Nonfiction",
+      "Biography",
+      "Memoir",
+      "Self-Help",
+      "Philosophy",
+      "Religion",
+      "Poetry",
+      "Comics",
+      "Graphic Novels",
+      "Travel",
+      "Cooking",
+      "Art",
+      "Photography",
+      "Reference",
+      "Education"
+    ],
+    "magazine": [],
+    "cd": [],
+    "dvd": [],
+    "board-game": [],
+    "video-game": []
+  }
+}

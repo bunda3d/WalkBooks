@@ -7,7 +7,8 @@
 		public string? Author { get; set; }
 		public string? ISBN { get; set; }
 		public int? PublicationYear { get; set; }
-		public string? Genre { get; set; }
 		public string? CoverImageUrl { get; set; }
+
+		public List<GenreType> Genres { get; set; } = new();
 	}
 }

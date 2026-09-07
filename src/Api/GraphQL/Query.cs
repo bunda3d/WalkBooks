@@ -1,4 +1,5 @@
-﻿using Api.GraphQL.Types;
+﻿using Api.Data;
+using Api.GraphQL.Types;
 
 namespace Api.GraphQL
 {
@@ -9,5 +10,8 @@ namespace Api.GraphQL
 
 		public IEnumerable<BookType> GetBooks() =>
 			new List<BookType>(); // stub for now...
+
+		public IEnumerable<GenreType> GetGenres() =>
+			GenreSeed.List; // static list for now...
 	}
 }
