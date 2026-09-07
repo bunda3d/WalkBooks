@@ -50,13 +50,26 @@ or run locally: `pwsh .\tools\generate-tree.ps1 -Depth 4`.
 │  └─ README.md
 ├─ src
 │  ├─ Api
+│  │  ├─ Data
+│  │  │  ├─ genres.json
+│  │  │  └─ GenreSeed.cs
 │  │  ├─ GraphQL
+│  │  │  ├─ Mutations
+│  │  │  │  ├─ BookCopyMutations.cs
+│  │  │  │  ├─ BookMutations.cs
+│  │  │  │  ├─ GenreMutations.cs
+│  │  │  │  ├─ LibraryMutations.cs
+│  │  │  │  ├─ LibrarySnapshotMutations.cs
+│  │  │  │  └─ UserMutations.cs
 │  │  │  ├─ Types
 │  │  │  │  ├─ BookCopyType.cs
 │  │  │  │  ├─ BookType.cs
+│  │  │  │  ├─ GenreType.cs
 │  │  │  │  ├─ LibrarySnapshotType.cs
 │  │  │  │  ├─ LibraryType.cs
-│  │  │  │  └─ UserContributionType.cs
+│  │  │  │  ├─ UserContributionType.cs
+│  │  │  │  └─ UserType.cs
+│  │  │  ├─ Mutation.cs
 │  │  │  └─ Query.cs
 │  │  ├─ Properties
 │  │  │  └─ launchSettings.json
