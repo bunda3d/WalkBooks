@@ -1,4 +1,5 @@
 using Api.Data;
+using Microsoft.EntityFrameworkCore;
 using Api.GraphQL;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,6 +7,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services
+	.AddDbContext<WalkBooksDbContext>(options =>
+	{
+		options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
+	})
 	.AddOpenApi()
 	.AddGraphQLServer()
 	.AddQueryType<Query>()
@@ -13,7 +18,7 @@ builder.Services
 
 var app = builder.Build();
 
-// Load the static list of book genres from the JSON file
+// Load static list of book genres from the JSON file
 GenreSeed.LoadBookGenres("Data/genres.json");
 
 // Configure the HTTP request pipeline.
