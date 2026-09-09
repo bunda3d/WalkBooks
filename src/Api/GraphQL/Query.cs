@@ -1,5 +1,6 @@
 ﻿using Api.Data;
 using Api.GraphQL.Types;
+using Api.Services;
 
 namespace Api.GraphQL
 {
@@ -11,7 +12,10 @@ namespace Api.GraphQL
 		public IEnumerable<BookType> GetBooks() =>
 			new List<BookType>(); // stub for now...
 
-		public IEnumerable<GenreType> GetGenres() =>
-			GenreSeed.List; // static list for now...
+		public Task<List<GenreType>> GetGenres(
+			GenreMedium medium,
+			[Service] GenreService service,
+			CancellationToken ct
+		) => service.GetGenresAsync(medium, ct);
 	}
 }

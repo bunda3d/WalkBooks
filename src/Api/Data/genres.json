@@ -2,36 +2,138 @@
   "version": 1,
   "genres": {
     "book": [
-      "Fantasy",
-      "Science Fiction",
-      "Mystery",
-      "Thriller",
-      "Horror",
-      "Romance",
-      "Historical Fiction",
-      "Literary Fiction",
-      "Young Adult",
-      "Children’s",
-      "Nonfiction",
-      "Biography",
-      "Memoir",
-      "Self-Help",
-      "Philosophy",
-      "Religion",
-      "Poetry",
-      "Comics",
-      "Graphic Novels",
-      "Travel",
-      "Cooking",
-      "Art",
-      "Photography",
-      "Reference",
-      "Education"
+      {
+        "id": "b6f0b7b4-4f0b-4c3c-9c3b-4f6b9c3b4f01",
+        "name": "Fantasy",
+        "medium": "Book"
+      },
+      {
+        "id": "c1a9c2e3-7b4d-4c2f-8a1b-9d3e7f2a5b02",
+        "name": "Science Fiction",
+        "medium": "Book"
+      },
+      {
+        "id": "d4e7f2a5-9c3b-4f6b-8a1b-7b4d3c2e6f03",
+        "name": "Mystery",
+        "medium": "Book"
+      },
+      {
+        "id": "e9f1a2b3-6c4d-4e5f-9a2b-8c3d4e5f6a04",
+        "name": "Thriller",
+        "medium": "Book"
+      },
+      {
+        "id": "f2b3c4d5-7e6f-4a5b-8c9d-1e2f3a4b5c05",
+        "name": "Horror",
+        "medium": "Book"
+      },
+      {
+        "id": "a3c4d5e6-8f7a-4b5c-9d0e-2f3a4b5c6d06",
+        "name": "Romance",
+        "medium": "Book"
+      },
+      {
+        "id": "b4d5e6f7-9a8b-4c5d-0e1f-3a4b5c6d7e07",
+        "name": "Historical Fiction",
+        "medium": "Book"
+      },
+      {
+        "id": "c5e6f7a8-0b9c-4d5e-1f2a-4b5c6d7e8f08",
+        "name": "Literary Fiction",
+        "medium": "Book"
+      },
+      {
+        "id": "d6f7a8b9-1c0d-4e5f-2a3b-5c6d7e8f9a09",
+        "name": "Young Adult",
+        "medium": "Book"
+      },
+      {
+        "id": "e7a8b9c0-2d1e-4f5a-3b4c-6d7e8f9a0b10",
+        "name": "Children’s",
+        "medium": "Book"
+      },
+      {
+        "id": "f8b9c0d1-3e2f-405b-4c5d-7e8f9a0b1c11",
+        "name": "Nonfiction",
+        "medium": "Book"
+      },
+      {
+        "id": "a9c0d1e2-4f3a-416c-5d6e-8f9a0b1c2d12",
+        "name": "Biography",
+        "medium": "Book"
+      },
+      {
+        "id": "b0d1e2f3-5a4b-427d-6e7f-9a0b1c2d3e13",
+        "name": "Memoir",
+        "medium": "Book"
+      },
+      {
+        "id": "c1e2f3a4-6b5c-438e-7f80-0b1c2d3e4f14",
+        "name": "Self-Help",
+        "medium": "Book"
+      },
+      {
+        "id": "d2f3a4b5-7c6d-449f-8011-1c2d3e4f5a15",
+        "name": "Philosophy",
+        "medium": "Book"
+      },
+      {
+        "id": "e3a4b5c6-8d7e-45a0-9122-2d3e4f5a6b16",
+        "name": "Religion",
+        "medium": "Book"
+      },
+      {
+        "id": "f4b5c6d7-9e8f-46b1-0233-3e4f5a6b7c17",
+        "name": "Poetry",
+        "medium": "Book"
+      },
+      {
+        "id": "a5c6d7e8-0f9a-47c2-1344-4f5a6b7c8d18",
+        "name": "Comics",
+        "medium": "Book"
+      },
+      {
+        "id": "b6d7e8f9-10ab-48d3-2455-5a6b7c8d9e19",
+        "name": "Graphic Novels",
+        "medium": "Book"
+      },
+      {
+        "id": "c7e8f9a0-21bc-49e4-3566-6b7c8d9e0f20",
+        "name": "Travel",
+        "medium": "Book"
+      },
+      {
+        "id": "d8f9a0b1-32cd-40f5-4677-7c8d9e0f1a21",
+        "name": "Cooking",
+        "medium": "Book"
+      },
+      {
+        "id": "e9a0b1c2-43de-41a6-5788-8d9e0f1a2b22",
+        "name": "Art",
+        "medium": "Book"
+      },
+      {
+        "id": "f0b1c2d3-54ef-42b7-6899-9e0f1a2b3c23",
+        "name": "Photography",
+        "medium": "Book"
+      },
+      {
+        "id": "a1c2d3e4-65f0-43c8-79aa-0f1a2b3c4d24",
+        "name": "Reference",
+        "medium": "Book"
+      },
+      {
+        "id": "b2d3e4f5-7601-44d9-8abb-1a2b3c4d5e25",
+        "name": "Education",
+        "medium": "Book"
+      }
     ],
     "magazine": [],
-    "cd": [],
-    "dvd": [],
-    "board-game": [],
-    "video-game": []
+    "cd-audiobook": [],
+    "cd-music": [],
+    "dvd-movie": [],
+    "dvd-show": [],
+    "game-board": [],
+    "game-video": []
   }
 }

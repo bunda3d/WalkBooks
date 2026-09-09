@@ -19,8 +19,16 @@ namespace Api.Data
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
+			modelBuilder.Entity<GenreType>(entity =>
+			{
+				entity.Property(g => g.Medium)
+							.HasConversion<string>(); // store enum as text
+			});
+
 			// Seed genres from JSON
-			var genres = GenreSeed.List;
+			var genres = GenreSeed.LoadAll("Data/genres.json");
+
+			// Seed genres
 			modelBuilder.Entity<GenreType>().HasData(genres);
 
 			base.OnModelCreating(modelBuilder);

@@ -5,27 +5,30 @@ namespace Api.Data
 {
 	public class GenreSeed
 	{
-		public static List<GenreType> List { get; private set; } = new();
-
-		public static void LoadBookGenres(string jsonPath)
+		public static IReadOnlyList<GenreType> LoadAll(string jsonPath)
 		{
 			var json = File.ReadAllText(jsonPath);
-
 			using var doc = JsonDocument.Parse(json);
-			var root = doc.RootElement;
+			var root = doc.RootElement.GetProperty("genres");
+			var all = new List<GenreType>();
 
-			var bookGenres = root
-				.GetProperty("genres")
-				.GetProperty("book")
-				.EnumerateArray()
-				.Select(g => new GenreType
+			foreach (var category in root.EnumerateObject())
+			{
+				var mediumName = category.Name.Replace("-", "_", StringComparison.OrdinalIgnoreCase);
+				var medium = Enum.Parse<GenreMedium>(mediumName, ignoreCase: true);
+
+				foreach (var g in category.Value.EnumerateArray())
 				{
-					Id = Guid.NewGuid(),
-					Name = g.GetString()!
-				})
-				.ToList();
+					all.Add(new GenreType
+					{
+						Id = Guid.Parse(g.GetProperty("id").GetString()!),
+						Name = g.GetProperty("name").GetString()!,
+						Medium = medium
+					});
+				}
+			}
 
-			List = bookGenres;
+			return all;
 		}
 	}
 }
