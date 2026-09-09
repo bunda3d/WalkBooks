@@ -85,6 +85,7 @@ or run locally: `pwsh .\tools\generate-tree.ps1 -Depth 4`.
 │  │  ├─ Properties
 │  │  │  └─ launchSettings.json
 │  │  ├─ Services
+│  │  │  ├─ BookService.cs
 │  │  │  └─ GenreService.cs
 │  │  ├─ Api.csproj
 │  │  ├─ Api.http
