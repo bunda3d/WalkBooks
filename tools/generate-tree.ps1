@@ -20,6 +20,12 @@ param(
   [string]$Path = '.',
   [int]$Depth = 4,
   [string[]]$Exclude = @('.git','bin','obj','node_modules','tmp','publish','.vs'),
+  [string[]]$ExcludePaths = @(
+    '\\Migrations\\2',          # exclude timestamped migrations
+    '\\Migrations\\.*Designer', # exclude designer files
+    '\\Web\\dist',              # exclude built frontend
+    '\\Api\\logs'               # exclude API logs
+  ),
   [string]$TmpFile = 'tree.tmp',
   [string]$ReadmeFile = 'README.md',
   [switch]$RemoveOnFail
@@ -33,7 +39,22 @@ function Write-Tree {
   if ($Level -gt $Depth) { return }
 
   $items = Get-ChildItem -LiteralPath $Path -Force -ErrorAction SilentlyContinue |
-    Where-Object { -not ($Exclude -contains $_.Name) } |
+    Where-Object { 
+      $file = $_
+
+      # exclude exact names (folders/files)
+      if ($Exclude -contains $file.Name) { return $false }
+
+      # exclude if any pattern in $ExcludePaths matches the file's full path
+      $matchesPattern = $false
+      foreach ($pattern in $ExcludePaths) {
+        if ($file.FullName -match $pattern) {
+          $matchesPattern = $true
+          break
+        }
+      }
+      -not $matchesPattern
+    } |
     Sort-Object -Property @{ Expression = { -not $_.PSIsContainer } }, @{ Expression = { $_.Name } }
 
   for ($i = 0; $i -lt $items.Count; $i++) {
