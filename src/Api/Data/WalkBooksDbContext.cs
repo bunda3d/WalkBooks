@@ -31,6 +31,11 @@ namespace Api.Data
 			// Seed genres
 			modelBuilder.Entity<GenreType>().HasData(genres);
 
+			modelBuilder.Entity<BookType>()
+				.HasMany(b => b.Genres)
+				.WithMany(g => g.Books)
+				.UsingEntity(j => j.ToTable("BookGenres"));
+
 			base.OnModelCreating(modelBuilder);
 		}
 	}

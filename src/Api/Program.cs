@@ -1,6 +1,7 @@
 using Api.Data;
 using Microsoft.EntityFrameworkCore;
 using Api.GraphQL;
+using Api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,15 +12,13 @@ builder.Services
 	{
 		options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
 	})
+	.AddScoped<GenreService>()
 	.AddOpenApi()
 	.AddGraphQLServer()
 	.AddQueryType<Query>()
 	.AddMutationType<Mutation>();
 
 var app = builder.Build();
-
-// Load static list of book genres from the JSON file
-GenreSeed.LoadBookGenres("Data/genres.json");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
