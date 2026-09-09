@@ -78,6 +78,8 @@ or run locally: `pwsh .\tools\generate-tree.ps1 -Depth 4`.
 │  │  │  └─ WalkBooksDbContextModelSnapshot.cs
 │  │  ├─ Properties
 │  │  │  └─ launchSettings.json
+│  │  ├─ Services
+│  │  │  └─ GenreService.cs
 │  │  ├─ Api.csproj
 │  │  ├─ Api.http
 │  │  ├─ appsettings.Development.json
