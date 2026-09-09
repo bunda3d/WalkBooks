@@ -72,6 +72,9 @@ or run locally: `pwsh .\tools\generate-tree.ps1 -Depth 4`.
 │  │  │  │  └─ UserType.cs
 │  │  │  ├─ Mutation.cs
 │  │  │  └─ Query.cs
+│  │  ├─ Migrations
+│  │  │  ├─ 20260907161941_InitialCreate.cs
+│  │  │  └─ 20260907161941_InitialCreate.Designer.cs
 │  │  ├─ Properties
 │  │  │  └─ launchSettings.json
 │  │  ├─ Api.csproj
