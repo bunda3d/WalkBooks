@@ -74,7 +74,8 @@ or run locally: `pwsh .\tools\generate-tree.ps1 -Depth 4`.
 │  │  │  └─ Query.cs
 │  │  ├─ Migrations
 │  │  │  ├─ 20260907161941_InitialCreate.cs
-│  │  │  └─ 20260907161941_InitialCreate.Designer.cs
+│  │  │  ├─ 20260907161941_InitialCreate.Designer.cs
+│  │  │  └─ WalkBooksDbContextModelSnapshot.cs
 │  │  ├─ Properties
 │  │  │  └─ launchSettings.json
 │  │  ├─ Api.csproj
