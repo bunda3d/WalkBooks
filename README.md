@@ -73,14 +73,6 @@ or run locally: `pwsh .\tools\generate-tree.ps1 -Depth 4`.
 │  │  │  ├─ Mutation.cs
 │  │  │  └─ Query.cs
 │  │  ├─ Migrations
-│  │  │  ├─ 20260907161941_InitialCreate.cs
-│  │  │  ├─ 20260907161941_InitialCreate.Designer.cs
-│  │  │  ├─ 20260909015846_AddGenreMedium.cs
-│  │  │  ├─ 20260909015846_AddGenreMedium.Designer.cs
-│  │  │  ├─ 20260909033529_RemoveBookTypeIdFromGenres.cs
-│  │  │  ├─ 20260909033529_RemoveBookTypeIdFromGenres.Designer.cs
-│  │  │  ├─ 20260909033912_AddBookGenresJoinTable.cs
-│  │  │  ├─ 20260909033912_AddBookGenresJoinTable.Designer.cs
 │  │  │  └─ WalkBooksDbContextModelSnapshot.cs
 │  │  ├─ Properties
 │  │  │  └─ launchSettings.json
