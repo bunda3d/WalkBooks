@@ -48,10 +48,12 @@ function Write-Tree {
       # exclude if any pattern in $ExcludePaths matches the file's full path
       $matchesPattern = $false
       foreach ($pattern in $ExcludePaths) {
-        if ($file.FullName -match $pattern) {
-          $matchesPattern = $true
-          break
-        }
+          # match both forward & back slashes to be OS file system agnostic
+          $regex = ($pattern -replace '\\\\', '[\\/]')
+          if ($file.FullName -match $regex) {
+              $matchesPattern = $true
+              break
+          }
       }
       -not $matchesPattern
     } |
